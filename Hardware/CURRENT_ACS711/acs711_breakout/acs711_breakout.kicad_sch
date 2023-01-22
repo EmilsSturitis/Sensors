@@ -856,7 +856,7 @@
   (symbol (lib_id "Device:LED") (at 190.5 62.23 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid af7944d9-46c2-48f3-ab44-3df3aeec04e4)
-    (property "Reference" "D?" (id 0) (at 188.9125 55.88 0))
+    (property "Reference" "D1" (id 0) (at 188.9125 55.88 0))
     (property "Value" "LED" (id 1) (at 188.9125 58.42 0))
     (property "Footprint" "LED_SMD:LED_PLCC-2" (id 2) (at 190.5 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -927,7 +927,7 @@
   (symbol (lib_id "Device:R_Small") (at 196.85 62.23 90) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid c642f5fe-0d4c-463f-9bd1-b1511f7116d0)
-    (property "Reference" "R?" (id 0) (at 196.85 55.88 90))
+    (property "Reference" "R2" (id 0) (at 196.85 55.88 90))
     (property "Value" "R_Small" (id 1) (at 196.85 58.42 90))
     (property "Footprint" "Resistor_SMD:R_0805_2012Metric" (id 2) (at 196.85 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -979,7 +979,7 @@
       (reference "C2") (unit 1) (value "C_Small") (footprint "Capacitor_SMD:C_0805_2012Metric")
     )
     (path "/af7944d9-46c2-48f3-ab44-3df3aeec04e4"
-      (reference "D?") (unit 1) (value "LED") (footprint "LED_SMD:LED_PLCC-2")
+      (reference "D1") (unit 1) (value "LED") (footprint "LED_SMD:LED_PLCC-2")
     )
     (path "/8c2d72eb-e3f8-4004-bace-d91f46a7cffd"
       (reference "H1") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_3.2mm_M3")
@@ -1006,7 +1006,7 @@
       (reference "R1") (unit 1) (value "R_Small") (footprint "Resistor_SMD:R_0805_2012Metric")
     )
     (path "/c642f5fe-0d4c-463f-9bd1-b1511f7116d0"
-      (reference "R?") (unit 1) (value "R_Small") (footprint "Resistor_SMD:R_0805_2012Metric")
+      (reference "R2") (unit 1) (value "R_Small") (footprint "Resistor_SMD:R_0805_2012Metric")
     )
     (path "/77d667f7-c52a-418a-9c37-7123db607eaa"
       (reference "U1") (unit 1) (value "ACS711xEXLT-15AB") (footprint "Sensor_Current:Allegro_QFN-12-10-1EP_3x3mm_P0.5mm")
