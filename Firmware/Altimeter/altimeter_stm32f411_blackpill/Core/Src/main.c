@@ -15,89 +15,70 @@
   *
   ******************************************************************************
   */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "usb_device.h"
+#include "MS580301.h"
+#include "usbd_cdc_if.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+#define SAMPLE_TIME_LOG_MS 100
+#define SAMPLE_TIME_LED_MS 500
 
-/* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
 
-/* USER CODE BEGIN PV */
 
-/* USER CODE END PV */
+//MS580301 press;
 
-/* Private function prototypes -----------------------------------------------*/
+
+
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
 
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
   SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_USB_DEVICE_Init();
-  /* USER CODE BEGIN 2 */
 
-  /* USER CODE END 2 */
+	MS580301_Initialise( &press, &hi2c1 );
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+char usbBuf[64];
+
+uint32_t timerLog;
+uint32_t timerLed;
+
   while (1)
   {
-    /* USER CODE END WHILE */
+
+	  /* Send accelerometer readings via virtual COM port (USB) */
+	  	if ( (HAL_GetTick() - timerLog) >= SAMPLE_TIME_LOG_MS ) {
+
+	  		//MS580301_?;
+	  		//MS580301_?;
+
+	  		//uint8_t usbBufLen = snprintf(usbBuf, 64, "%.2f,%.2f\r\n", filterInput, filt.output);
+	  		//CDC_Transmit_FS((uint8_t *) usbBuf, usbBufLen);
+
+	  		timerLog += SAMPLE_TIME_LOG_MS;
+
+	  	}
+
+	  	/* Toggle LED */
+	  	if ( (HAL_GetTick() - timerLed) >= SAMPLE_TIME_LED_MS ) {
+
+	  		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
+	  		timerLed += SAMPLE_TIME_LED_MS;
+
+	  	}
 
     /* USER CODE BEGIN 3 */
   }
@@ -194,12 +175,23 @@ static void MX_I2C1_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
 }
 
