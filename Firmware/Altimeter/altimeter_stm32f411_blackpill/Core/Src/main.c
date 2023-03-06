@@ -19,6 +19,7 @@
 #include "usb_device.h"
 #include "MS580301.h"
 #include "usbd_cdc_if.h"
+#include "stm32f4xx_hal_i2c.h"
 
 #define SAMPLE_TIME_LOG_MS 100
 #define SAMPLE_TIME_LED_MS 500

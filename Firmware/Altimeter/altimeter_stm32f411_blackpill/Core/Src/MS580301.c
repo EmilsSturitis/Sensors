@@ -66,10 +66,10 @@ HAL_StatusTypeDef MS580301_ReadTemperature( MS580301 *dev)
 
 	// read adc
 }
-
 /*
  * Low level functions
  */
+
 
 HAL_StatusTypeDef MS580301_ReadRegister( MS580301 *dev, uint8_t reg, uint8_t *data)
 {
@@ -84,4 +84,9 @@ HAL_StatusTypeDef MS580301_ReadRegisters( MS580301 *dev, uint8_t reg, uint8_t *d
 HAL_StatusTypeDef MS580301_WriteRegister( MS580301 *dev, uint8_t reg, uint8_t *data)
 {
 	return HAL_I2C_Mem_Write( dev->i2cHandle, MS580301_I2C_ADDR, reg, I2C_MEMADD_SIZE_8BIT, data, 1, HAL_MAX_DELAY);
+}
+
+HAL_StatusTypeDef MS580301_Master_Transmit( MS580301 *dev, uint8_t reg, uint8_t *data)
+{
+	return HAL_I2C_Master_Transmit(dev ->i2cHandle, MS580301_I2C_ADDR, I2C_MEMADD_SIZE_8BIT, data, HAL_MAX_DELAY);
 }

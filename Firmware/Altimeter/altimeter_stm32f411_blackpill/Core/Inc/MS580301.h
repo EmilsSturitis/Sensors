@@ -90,7 +90,7 @@ HAL_StatusTypeDef MS580301_Coefficient6( MS580301 *dev );
 HAL_StatusTypeDef MS580301_ReadRegister( MS580301 *dev, uint8_t reg, uint8_t *data);
 HAL_StatusTypeDef MS580301_ReadRegisters( MS580301 *dev, uint8_t reg, uint8_t *data, uint8_t *lenght );
 
-HAL_StatusTypeDef MS580301_WriteRegistr( MS580301 *dev, uint8_t reg, uint8_t *data);
+HAL_StatusTypeDef MS580301_WriteRegister( MS580301 *dev, uint8_t reg, uint8_t *data);
 
 
 
