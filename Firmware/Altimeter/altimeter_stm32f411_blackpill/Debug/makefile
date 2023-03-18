@@ -65,7 +65,7 @@ main-build: altimeter_stm32f411_blackpill.elf secondary-outputs
 
 # Tool invocations
 altimeter_stm32f411_blackpill.elf altimeter_stm32f411_blackpill.map: $(OBJS) $(USER_OBJS) /home/emils/STM32CubeIDE/workspace_1.11.2/altimeter_stm32f411_blackpill/STM32F411CEUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "altimeter_stm32f411_blackpill.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/emils/STM32CubeIDE/workspace_1.11.2/altimeter_stm32f411_blackpill/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="altimeter_stm32f411_blackpill.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "altimeter_stm32f411_blackpill.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/emils/STM32CubeIDE/workspace_1.11.2/altimeter_stm32f411_blackpill/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="altimeter_stm32f411_blackpill.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -28,7 +28,8 @@
 I2C_HandleTypeDef hi2c1;
 
 
-//MS580301 press;
+MS580301 ms5803;
+uint32_t pressure, temperature;
 
 
 
@@ -41,15 +42,13 @@ int main(void)
 {
 
   HAL_Init();
-
-
   SystemClock_Config();
-
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_USB_DEVICE_Init();
 
-	MS580301_Initialise( &press, &hi2c1 );
+// Sensor config
+  MS580301_Init(&ms5803, &hi2c1);
 
 char usbBuf[64];
 
@@ -59,27 +58,16 @@ uint32_t timerLed;
   while (1)
   {
 
-	  /* Send accelerometer readings via virtual COM port (USB) */
-	  	if ( (HAL_GetTick() - timerLog) >= SAMPLE_TIME_LOG_MS ) {
+	  MS580301_ReadSensorData(&ms5803, &pressure, &temperature);
+	  float altitude = MS580301_CalculateAltitude(&ms5803, pressure);
+	  char buffer[64];
+	  snprintf(buffer, 64, "Pressure: %lu Pa, Temperature: %lu mdegc, Altitude: %.2f m\r\n", pressure, temperature, altitude);
+	  CDC_Transmit_FS((uint8_t*)buffer, strlen(buffer));
+	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	  HAL_Delay(1000);
 
-	  		//MS580301_?;
-	  		//MS580301_?;
 
-	  		//uint8_t usbBufLen = snprintf(usbBuf, 64, "%.2f,%.2f\r\n", filterInput, filt.output);
-	  		//CDC_Transmit_FS((uint8_t *) usbBuf, usbBufLen);
 
-	  		timerLog += SAMPLE_TIME_LOG_MS;
-
-	  	}
-
-	  	/* Toggle LED */
-	  	if ( (HAL_GetTick() - timerLed) >= SAMPLE_TIME_LED_MS ) {
-
-	  		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-
-	  		timerLed += SAMPLE_TIME_LED_MS;
-
-	  	}
 
     /* USER CODE BEGIN 3 */
   }
