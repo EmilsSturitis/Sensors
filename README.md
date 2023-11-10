@@ -7,3 +7,5 @@ Based on the TE MS581 sensor.
 FW:
 Based on the STM32F411
 
+OPA548_dev  
+Programmable CC/CV PSU
