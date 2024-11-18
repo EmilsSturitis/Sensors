@@ -1,0 +1,7 @@
+../Core/Src/MS580301.c:15:13:MS580301_WriteCommand	1
+../Core/Src/MS580301.c:20:17:MS580301_ReadData	1
+../Core/Src/MS580301.c:30:6:MS580301_Init	1
+../Core/Src/MS580301.c:37:6:MS580301_ReadCalibrationData	2
+../Core/Src/MS580301.c:57:6:MS580301_Reset	1
+../Core/Src/MS580301.c:65:6:MS580301_ReadSensorData	7
+../Core/Src/MS580301.c:108:7:MS580301_CalculateAltitude	1

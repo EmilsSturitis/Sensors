@@ -108,6 +108,7 @@ if (*temperature < 2000)
 float MS580301_CalculateAltitude(MS580301* sensor, uint32_t pressure)
 {
 	float altitude = (1 - powf((float)pressure / MS580301_Sea_Level_Pressure, 0.1903f)) * 44330.0f;
+	//float altitude = (1 - powf((float)pressure / MS580301_Sea_Level_Pressure));
 	return altitude;
 }
 

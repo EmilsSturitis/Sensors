@@ -11,7 +11,7 @@
 #include "stm32f4xx_hal.h"
 
 
-#define MS580301_I2C_ADDRESS 	0x76 //CBS setting high
+#define MS580301_I2C_ADDRESS 	0x77 //CBS setting high
 
 typedef struct
 {
@@ -31,7 +31,7 @@ void MS580301_Init(MS580301* sensor, I2C_HandleTypeDef* hi2c);
 void MS580301_Reset(MS580301* sensor);
 void MS580301_ReadCalibrationData(MS580301* sensor);
 void MS580301_ReadSensorData(MS580301* sensor, uint32_t* pressure, uint32_t* temperature);
-
+//void MS580301_CalculateAltitude(MS580301* sensor, uint32_t pressure);
 
 
 
